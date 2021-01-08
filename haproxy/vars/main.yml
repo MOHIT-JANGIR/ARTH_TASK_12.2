@@ -1,0 +1,4 @@
+---
+# vars file for task15
+servers: groups['tag_Name_{{ web_tag }}']
+

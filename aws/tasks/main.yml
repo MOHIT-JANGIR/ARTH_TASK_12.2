@@ -1,0 +1,39 @@
+---
+# tasks file for aws
+- name: "provisioning ec2 instance for Apache web servers"
+  #include_vars: secrets.yml
+  ec2:
+       key_name: "{{ key }}"
+       instance_type: "{{ instance_type }}"
+       image: "{{ image_name }}"
+       wait: yes
+       count: "{{ web_count }}"
+       instance_tags:
+          Name: "{{ web_tag }}"
+       vpc_subnet_id: "{{ subnet_id }}"
+       assign_public_ip: yes
+       region: "{{ AZ }}"
+       state: present
+       group_id: "{{ security_group }}"
+       aws_access_key: "{{ access_key }}"
+       aws_secret_key: "{{ secret_key }}"
+   #when: false
+
+- name: "provisioning ec2 instance for Haproxy Load Balancer"
+  #include_vars: secrets.yml
+  ec2:
+       key_name: "{{ key }}"
+       instance_type: "{{ instance_type }}"
+       image: "{{ image_name }}"
+       wait: yes
+       count: "{{ lb_count }}"
+       instance_tags:
+          Name: "{{ lb_tag }}"
+       vpc_subnet_id: "{{ subnet_id }}"
+       assign_public_ip: yes
+       region: "{{ AZ }}"
+       state: present
+       group_id: "{{ security_group }}"
+       aws_access_key: "{{ access_key }}"
+       aws_secret_key: "{{ secret_key }}"  
+  when: false
