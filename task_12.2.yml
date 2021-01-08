@@ -1,0 +1,21 @@
+- hosts: localhost
+  #include_vars: 
+  #file: /roles/aws/vars/secrets.yml
+  roles:
+  - role: aws
+  tasks:
+          #- include_vars: /roles/aws/vars/secrets.yml
+  - name: "waiting for instances to come into running state from pending state" 
+    meta: refresh_inventory
+    
+- hosts: "tag_Name_{{ web_tag }}"
+  vars_files:
+  - /roles/aws/vars/main.yml
+  roles:
+  - role: httpd
+
+- hosts: "tag_Name_{{ lb_tag }}"
+  vars_files:
+  - /roles/aws/vars/main.yml
+  roles:
+  - role: haproxy
