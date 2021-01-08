@@ -1,0 +1,12 @@
+---
+# vars file for aws
+key: "slave1"
+instance_type: "t2.micro"
+image_name: "ami-04b1ddd35fd71475a"
+web_count: 1
+lb_count: 1
+web_tag: "Apache_web"
+lb_tag: "Haproxy_lb"
+subnet_id: "subnet-a77970cf"
+AZ: "ap-south-1"
+security_group: "sg-0dc77dcdc092aa48c"
